@@ -12,7 +12,6 @@ import plotly.express as px
 # 1. Page configuration
 st.set_page_config(
     page_title="World Happiness Dashboard",
-    page_icon="🌍",
     layout="wide"
 )
 
@@ -48,12 +47,12 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("### BBD Design Highlights")
-    st.caption("✅ **5-Second Summary**: KPI row at the top for rapid monitoring.\n\n✅ **Deliberate Color Usage**: Sequential blue for rankings, categorical color for scatter, and **diverging RdBu** centered at global mean for departure analysis.")
+    st.caption("- **5-Second Summary**: KPI row at the top for rapid monitoring.\n\n- **Deliberate Color Usage**: Sequential blue for rankings, categorical color for scatter, and diverging RdBu centered at global mean for departure analysis.")
 
 filtered = df if selected_region == 'All' else df[df['Region'] == selected_region]
 
 # 4. Dashboard Header
-st.title("🌍 World Happiness Dashboard")
+st.title("World Happiness Dashboard")
 st.caption("Source: World Happiness Report 2023 | Built with Streamlit & Plotly")
 
 # 5. KPI Row — BBD: big numbers at the top, readable in 5 seconds
@@ -72,7 +71,7 @@ st.divider()
 col_left, col_right = st.columns(2)
 
 with col_left:
-    st.subheader("🏆 Rankings")
+    st.subheader("Rankings")
     top = filtered.nlargest(top_n, 'Score').sort_values('Score')
     
     fig1 = px.bar(
@@ -90,7 +89,7 @@ with col_left:
     st.plotly_chart(fig1, use_container_width=True)
 
 with col_right:
-    st.subheader("💰 Score vs GDP")
+    st.subheader("Score vs GDP")
     fig2 = px.scatter(
         filtered, x='GDP', y='Score', hover_name='Country',
         color_discrete_sequence=['#E63946'],
@@ -108,7 +107,7 @@ with col_right:
 st.divider()
 
 # 7. STEP 6: Exercise — Third chart with DIVERGING colour scale & Midpoint Annotation
-st.subheader("⚖️ Happiness Score Departure from Global Average")
+st.subheader("Happiness Score Departure from Global Average")
 st.markdown(
     f"This visualization uses a **diverging colour scale (`RdBu`)** centered at **0.00** (representing the global average happiness score of **{global_mean:.2f}**). "
     "Countries plotted in **blue** exceed the global average, while countries in **red** fall below the global average."
@@ -156,7 +155,7 @@ fig3.add_annotation(
     x=0,
     y=1.03,
     yref="paper",
-    text=f"📍 Midpoint Reference: Global Average ({global_mean:.2f})",
+    text=f"Midpoint Reference: Global Average ({global_mean:.2f})",
     showarrow=False,
     font=dict(size=12, color="#111111", family="Arial"),
     bgcolor="rgba(245, 245, 245, 0.95)",
@@ -178,4 +177,4 @@ fig3.update_traces(marker_line_width=0)
 st.plotly_chart(fig3, use_container_width=True)
 
 st.divider()
-st.caption("🚀 Designed & Deployed for Week 09 Data Visualization | Streamlit Community Cloud Ready")
+st.caption("Designed & Deployed for Week 09 Data Visualization | Streamlit Community Cloud Ready")
